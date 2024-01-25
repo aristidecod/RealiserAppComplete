@@ -1,5 +1,6 @@
 package com.ah.towerfight;
 
+import com.ah.towerfight.screens.MainMenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,10 +12,10 @@ public class App extends Game {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		//img = new Texture("badlogic.jpg");
 
 		// Définissez l'écran initial ici, par exemple:
-		// this.setScreen(new MainMenuScreen(this));
+		this.setScreen(new MainMenuScreen(this));
 	}
 
 	@Override

@@ -20,6 +20,10 @@ public class UserCard {
         this.quantity = quantity;
     }
 
+    public UserCardId getId() {
+        return id;
+    }
+
     public Integer getQuantity() {
         return quantity;
     }

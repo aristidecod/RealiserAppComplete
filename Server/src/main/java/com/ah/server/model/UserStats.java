@@ -1,6 +1,14 @@
 package com.ah.server.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
@@ -9,10 +17,10 @@ import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "userstats")
-public class UserStats {
+public class UserStats implements Serializable {
     @Id
-    @Column(name = "user_id")
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -23,13 +31,20 @@ public class UserStats {
     private Integer coins;
     private Integer gems;
 
-    public UserStats(Long userId, User user, Integer xp, Integer level, Integer coins, Integer gems) {
-        this.userId = userId;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "userstats_id")
+    private List<Reward> rewards;
+
+    public UserStats(User user, Integer xp, Integer level, Integer coins, Integer gems) {
         this.user = user;
         this.xp = xp;
         this.level = level;
         this.coins = coins;
         this.gems = gems;
+        this.rewards = new ArrayList<>();
+    }
+
+    public UserStats(){
     }
 
     public User getUser() {
@@ -70,5 +85,13 @@ public class UserStats {
 
     public void setGems(Integer gems) {
         this.gems = gems;
+    }
+
+    public List<Reward> getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(List<Reward> rewards) {
+        this.rewards = rewards;
     }
 }

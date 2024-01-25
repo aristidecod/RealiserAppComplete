@@ -6,6 +6,6 @@ import com.ah.server.model.UserCard.UserCardId;
 import java.util.List;
 
 public interface UserCardRepository extends JpaRepository<UserCard, UserCardId> {
-    List<UserCard> findByUserId(Long userId);
+    List<UserCard> findById_UserId(Long userId);
     //findByUserId pour obtenir toutes les cartes d'un utilisateur spécifique.
 }

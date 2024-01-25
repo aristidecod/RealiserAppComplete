@@ -48,6 +48,13 @@ public class Card {
         this.coutEnElixir = coutEnElixir;
     }
 
+    public Card(){
+    }
+
+    public Long getId() {
+        return id;
+    }
+
     public String getNom() {
         return nom;
     }

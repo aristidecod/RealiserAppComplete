@@ -31,7 +31,7 @@ public class UserCardService {
 
     // Récupérer les cartes d'un utilisateur
     public List<UserCard> getUserCardsByUserId(Long userId) {
-        return userCardRepository.findByUserId(userId);
+        return userCardRepository.findById_UserId(userId);
     }
 
     // Supprimer une carte spécifique d'un utilisateur
