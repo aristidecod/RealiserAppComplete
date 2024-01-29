@@ -25,7 +25,7 @@ public class Card {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private Rarete rarete;
+        private Rarete rarete;
 
     @Enumerated(EnumType.STRING)
     private Type type;

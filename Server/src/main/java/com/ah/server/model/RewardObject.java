@@ -11,7 +11,7 @@ public class RewardObject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
-
+    private  String name;
     private Integer quantity;
 
     public RewardObject() {
@@ -30,6 +30,10 @@ public class RewardObject {
         return type;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Integer getQuantity() {
         return quantity;
     }
@@ -40,6 +44,10 @@ public class RewardObject {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setQuantity(Integer quantity) {
