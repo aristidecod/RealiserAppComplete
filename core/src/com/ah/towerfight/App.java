@@ -2,35 +2,56 @@ package com.ah.towerfight;
 
 import com.ah.towerfight.screens.MainMenuScreen;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.ah.towerfight.connectivity.IConnectivity;
 
 public class App extends Game {
 	SpriteBatch batch;
-	Texture img;
+	Stage stage;
+	IConnectivity connectivityChecker;
+
+	public App(IConnectivity connectivityChecker) {
+		this.connectivityChecker = connectivityChecker;
+	}
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		//img = new Texture("badlogic.jpg");
+		stage = new Stage();
 
-		// Définissez l'écran initial ici, par exemple:
-		this.setScreen(new MainMenuScreen(this));
+		if (connectivityChecker != null && !connectivityChecker.isInternetAvailable()) {
+			showNoInternetDialog();
+		} else {
+			this.setScreen(new MainMenuScreen(this));
+		}
+	}
+
+	private void showNoInternetDialog() {
+		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+		Dialog dialog = new Dialog("Erreur de connexion", skin);
+		dialog.text("Une connexion Internet est nécessaire pour jouer à ce jeu.");
+		dialog.button("OK");
+		dialog.show(stage);
 	}
 
 	@Override
 	public void render() {
-		super.render(); // Important ! Cela déléguera le rendu à l'écran actuel.
+		super.render();
+		if (stage != null) {
+			stage.act();
+			stage.draw();
+		}
 	}
 
 	@Override
 	public void dispose() {
 		batch.dispose();
-		img.dispose();
-	}
-
-	// Getters pour les ressources communes, si nécessaire
-	public SpriteBatch getBatch() {
-		return batch;
+		if (stage != null) {
+			stage.dispose();
+		}
 	}
 }
