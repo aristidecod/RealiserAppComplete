@@ -10,14 +10,16 @@ public class ConnectivityMonitor {
     private final IConnectivity connectivityChecker;
     private final App gameApp;
     private boolean isConnected;
-    private Stage stage; // Ajouter une instance de Stage pour afficher la boîte de dialogue
+    private Stage stage;
 
     public ConnectivityMonitor(IConnectivity connectivityChecker, App gameApp) {
         this.connectivityChecker = connectivityChecker;
         this.gameApp = gameApp;
         this.isConnected = true;
-        this.stage = new Stage(); // Initialiser le Stage
-        Gdx.input.setInputProcessor(stage); // Définir le processeur d'entrée
+        // Initialiser le Stage
+        this.stage = new Stage();
+        // Définir le processeur d'entrée
+        Gdx.input.setInputProcessor(stage);
         startMonitoring();
     }
 

@@ -19,6 +19,7 @@ public class DesktopConnectivity implements IConnectivity {
             int responseCode = connection.getResponseCode();
             return (responseCode == 200);
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }

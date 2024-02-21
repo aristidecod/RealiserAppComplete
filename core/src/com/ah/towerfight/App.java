@@ -23,9 +23,17 @@ public class App extends Game {
 		batch = new SpriteBatch();
 		stage = new Stage();
 
-		if (connectivityChecker != null && !connectivityChecker.isInternetAvailable()) {
-			showNoInternetDialog();
+		if (connectivityChecker != null) {
+			if (!connectivityChecker.isInternetAvailable()) {
+				Gdx.app.log("Connectivité", "Pas de connexion Internet détectée.");
+				showNoInternetDialog();
+			} else {
+				Gdx.app.log("Connectivité", "Connexion Internet disponible.");
+				this.setScreen(new MainMenuScreen(this));
+			}
 		} else {
+			Gdx.app.log("Connectivité", "Le vérificateur de connectivité est null.");
+			// Peut-être montrer un dialogue d'erreur ou procéder avec une valeur par défaut
 			this.setScreen(new MainMenuScreen(this));
 		}
 	}
